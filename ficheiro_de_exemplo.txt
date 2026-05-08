@@ -1,0 +1,15 @@
+RELATÓRIO DE TESTE DE NORMALIZAÇÃO
+
+Este documento serve para testar as funcionalidades da aplicação Streamlit.
+Muitas vezes, a extração de texto gera espaços      excessivos entre as palavras.
+
+Cabeçalho Repetido
+Também é frequente que o texto
+tenha quebras de linha artificiais
+no meio de frases, o que dificulta o processamento por modelos de IA.
+
+Cabeçalho Repetido
+A normalização de texto, conforme descrito no relatório, utiliza expressões regulares para limpar estes elementos e a biblioteca langdetect para identificar o idioma.
+
+Cabeçalho Repetido
+Este ficheiro permite validar se os blocos (chunks) de 1000 caracteres são gerados corretamente para a criação de prompts.

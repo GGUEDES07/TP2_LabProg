@@ -1,0 +1,37 @@
+RELATÓRIO (TP2)
+
+O código fornecido implementa uma aplicação web utilizando a biblioteca Streamlit para o processamento e normalização de texto a partir de ficheiros de vários formatos (TXT, PDF, DOCX).
+O objetivo principal é limpar e preparar o conteúdo textual para tarefas subsequentes, como a criação de prompts para modelos de linguagem.
+
+Funcionalidade dos componentes utilizados no código
+
+1.1. Interface (Streamlit)
+A aplicação utiliza o 'st.sidebar' para permitir ao utilizador configurar as operações de limpeza (espaços, quebras de linha e cabeçalhos). O 'st.file_uploader' gere o carregamento dos documentos.
+
+1.2. Extração de Texto (extrair_texto_bruto)
+Esta função identifica a extensão do ficheiro e utiliza bibliotecas específicas:
+- 'docx': Para ficheiros Word.
+- 'PyPDF2': Para ficheiros PDF, iterando sobre as páginas para extrair o texto.
+- 'utf-8': Para ficheiros de texto simples.
+
+1.3. Limpeza e Pré-processamento (limpar_texto)
+É o núcleo lógico da normalização, utilizando Expressões Regulares (re):
+- Espaços: Reduz múltiplos espaços ou tabulações para um único espaço.
+- Quebras de linha: Corrige quebras artificiais no meio de frases e normaliza parágrafos.
+- Cabeçalhos/Rodapés: Utiliza a classe 'Counter' para identificar linhas repetidas (comuns em cabeçalhos de PDFs) e remove-as se aparecerem mais do que duas vezes ou se forem muito curtas.
+
+1.4. Segmentação (segmentar_texto)
+Divide o texto limpo em 'chunks' (blocos) de tamanho fixo (predefinido para 1000 caracteres). Isto é essencial para contornar limites de tokens em APIs de Inteligência Artificial.
+
+1.5. Deteção de Idioma e Prompts
+- Utiliza a biblioteca 'langdetect' para identificar o idioma do texto automaticamente.
+- A função 'criar_prompt' gera uma instrução formatada, preparando o bloco de texto para ser processado por um modelo de linguagem, focando-se na correção gramatical.
+
+1.6. Ficheiro de Teste (exemplo_normalizacao.txt)
+Foi criado um ficheiro de exemplo para validar as funcionalidades da pipeline. Este ficheiro inclui:
+- Múltiplos espaços entre palavras para testar a regex de normalização de espaços.
+- Quebras de linha artificiais no meio de frases para validar a reconstrução do fluxo de texto.
+- Linhas repetidas para testar a lógica de remoção de cabeçalhos baseada na classe 'Counter'.
+- Conteúdo em português para verificar a deteção automática de idioma via 'langdetect'.
+
+Concluíndo, a pipeline demonstra uma abordagem sólida para o tratamento de dados não estruturados, transformando documentos brutos em blocos de texto limpos, segmentados e prontos para integração com modelos de AI.
